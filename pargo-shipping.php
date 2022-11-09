@@ -13,14 +13,15 @@
 if ( !defined( 'ABSPATH' ) ) { exit; }
 
 /* ------------------------------------------------------------------------------------------------------------------ 
-  _____        __   _______   __          _______     _____  _             _           
- |  __ \ /\    \ \ / /_   _|  \ \        / /  __ \   |  __ \| |           (_)          
- | |__) /  \    \ V /  | |     \ \  /\  / /| |__) |  | |__) | |_   _  __ _ _ _ __      
- |  ___/ /\ \    > <   | |      \ \/  \/ / |  ___/   |  ___/| | | | |/ _` | | '_ \     
- | |  / ____ \  / . \ _| |_      \  /\  /  | |       | |    | | |_| | (_| | | | | |  _ 
- |_| /_/    \_\/_/ \_\_____|      \/  \/   |_|       |_|    |_|\__,_|\__, |_|_| |_| ( )
-      _                _                      _     _                 __/ |         |/ 
-     | |              | |                    | |   | |               |___/                  
+  _____        _____   _____  ____    __          _______    _____  _             _         
+ |  __ \ /\   |  __ \ / ____|/ __ \   \ \        / /  __ \  |  __ \| |           (_)        
+ | |__) /  \  | |__) | |  __| |  | |   \ \  /\  / /| |__) | | |__) | |_   _  __ _ _ _ __    
+ |  ___/ /\ \ |  _  /| | |_ | |  | |    \ \/  \/ / |  ___/  |  ___/| | | | |/ _` | | '_ \   
+ | |  / ____ \| | \ \| |__| | |__| |     \  /\  /  | |      | |    | | |_| | (_| | | | | |_ 
+ |_| /_/    \_\_|  \_\\_____|\____/       \/  \/   |_|      |_|    |_|\__,_|\__, |_|_| |_( )
+                                                                             __/ |       |/ 
+      _                _                      _     _                       \ __/         
+     | |              | |                    | |   | |                                
    __| | _____   _____| | ___  _ __   ___  __| |   | |__  _   _ 
   / _` |/ _ \ \ / / _ \ |/ _ \| '_ \ / _ \/ _` |   | '_ \| | | |
  | (_| |  __/\ V /  __/ | (_) | |_) |  __/ (_| |   | |_) | |_| |
@@ -48,7 +49,6 @@ function pargo_activation()
             'Content-Type' => 'application/json',
         ),
         'body'    => array(),
-        'method'    => 'POST'
     );
 
     $response = wp_remote_get(wp_http_validate_url($url), $args);
@@ -347,7 +347,7 @@ apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) )
             woocommerce_form_field('pargo_shipping_method_location' , array(
                 'type'          => 'text',
                 'class'         => array('form-row-wide pargo-shipping-method-location'),
-                'label'         => '<a href="https://www.pargo.co.za/points" target="_blank">Locate nearest PARGO Point:</a>',
+                'label'         => '<a href="https://www.pargo.co.za/find-a-store" target="_blank">Locate nearest PARGO Point:</a>',
                 'required'      => true,
                 'placeholder'   => 'Nearest PARGO Point',
                 ), WC()->checkout->get_value( 'pargo_shipping_method_location' )
@@ -379,10 +379,10 @@ apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) )
         {
             if (empty ( $_POST['pargo_shipping_method_location'] ) )
             {
-                wc_add_notice('<strong>You did not provide a <a href="https://www.pargo.co.za/points" target="blank">PARGO</a> Point Number</strong>:<br>Visit the <a href="https://www.pargo.co.za/points" target="blank">PARGO website</a> and search for the nearest PARGO Point, then enter the PARGO Point number into the space provided on this form.', 'error');
-            } elseif (strlen($_POST['pargo_shipping_method_location']) !== 5)
+                wc_add_notice('<strong>You did not provide a <a href="https://www.pargo.co.za/find-a-store" target="blank">PARGO</a> Point Code</strong>:<br>Visit the <a href="https://www.pargo.co.za/find-a-store" target="blank">PARGO website</a>, allow the website to know your location, or search for the nearest PARGO Point, click on the location marker to open the location profile on the left. Locate the Pargo Point Code (You might have to click  "More Info" to reveal the pupcode). Then return to this page and enter the PARGO Point code into the space provided on this form.', 'error');
+            } elseif (strlen($_POST['pargo_shipping_method_location']) !== 7)
             {
-                wc_add_notice('<strong><a href="https://www.pargo.co.za/points" target="blank">PARGO</a> Point number does not appear to be correct</strong>:<br>Ensure you provide the correct point number by visiting the <a href="https://www.pargo.co.za/points" target="blank">PARGO website</a>, searching for the nearest or most convevient collection point, and then enter the PARGO Point Number where you want to collect, into the space provided on this form.', 'error');
+                wc_add_notice('<strong><a href="https://www.pargo.co.za/find-a-store" target="blank">PARGO</a> Point code does not appear to be correct</strong>:<br>Ensure you provide the correct Pargo Point Code by visiting the <a href="https://www.pargo.co.za/find-a-store" target="blank">PARGO website</a>, allow the website to know your location, or search for the nearest PARGO Point, click on the location marker to open the location profile on the left. Locate the Pargo Point Code (You might have to click  "More Info" to reveal the pupcode). Then return to this page and enter the PARGO Point code into the space provided on this form.', 'error');
             }
         }
         return $errors;
@@ -609,8 +609,8 @@ apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) )
 
 
     // Get info for each product ordered
-    add_action('woocommerce_checkout_order_processed', 'get_product_info', 10, 1);
-    function get_product_info( $order_id ) 
+    add_action('woocommerce_checkout_order_processed', 'get_pargo_product_info', 10, 1);
+    function get_pargo_product_info( $order_id ) 
     {
         // Getting an instance of the order object
         $order = wc_get_order( $order_id );
