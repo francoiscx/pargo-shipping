@@ -532,9 +532,9 @@ apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) )
 
         if ( is_ssl() )
         {
-            update_option('main_pargo', wp_http_validate_url('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']));
+            update_option('main_pargo', sanitize_url('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']));
         } else {
-            update_option('main_pargo', wp_http_validate_url('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']));
+            update_option('main_pargo', sanitize_url('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']));
         }
 
         if (get_option ( 'main_pargo' ) )

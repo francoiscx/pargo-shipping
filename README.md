@@ -3,7 +3,7 @@
 Contributors: pargo-shipping
 Tags: PARGO, PARGO Shipping, PARGO Plugin, Clicks, Total, PEP, PEP CELL, PEP HOME, ShoeCity, Tellie Town, PEPKOR, SKYNET, RAM, WooCommerce, WooCommerse, PAXI, POSTNET, POPI, POPIA
 Requires at least: 5.4
-Tested up to: 6.0.3
+Tested up to: 6.0
 Requires PHP: 7.3
 WC requires at least: 7.0 and WC tested up to: 7.0.0
 Stable tag: 1.0.0

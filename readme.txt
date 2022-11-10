@@ -2,7 +2,7 @@
 Contributors: pargo-plugin
 Tags: PARGO, PARGO Plugin, Clicks, TOTAL, PEP, PEP CELL, PEP HOME, ShoeCity, Tellie Town, PEPKOR, SKYNET, RAM, WooCommerce, WooCommerse, PAXI, POSTNET, POPI, POPIA
 Requires at least: 5.4
-Tested up to: 6.0.3
+Tested up to: 6.0
 Requires PHP: 7.3
 WC requires at least: 7.0 and WC tested up to: 7.0.0
 Stable tag: 1.0.0
@@ -31,6 +31,11 @@ Link to service Privacy Policy: https://bepopiacompliant.co.za/#/privacy/pargopl
 https://analytics.ppp.web-x.co.za/api/newusercreated
 - we collect your domain name, user ID and email address of admin users and send it to our database to log an entry so that we can collect further data about the use of uour plugin on your site.
 
+https://analytics.ppp.web-x.co.za/api/plugindetailscheck/
+- we use this to determine if you have used the plugin onyour site before.
+
+https://analytics.ppp.web-x.co.za/api/plugindetails/
+- we use this to determine if you are registerd to use the PRO version of this plugin.
 
 == Installation ==
 Install from WordPress Library
